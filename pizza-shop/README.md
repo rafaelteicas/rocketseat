@@ -8,3 +8,5 @@
 - React Helmet Async
 - Sonner
 - Recharts
+- Axios
+- React Query
