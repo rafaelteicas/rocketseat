@@ -7,3 +7,4 @@
 - React Router Dom
 - React Helmet Async
 - Sonner
+- Recharts

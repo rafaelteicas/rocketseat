@@ -5,7 +5,7 @@ import { Helmet } from 'react-helmet-async'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { toast } from 'sonner'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const signUp = z.object({
   restaurantName: z.string(),
@@ -18,10 +18,15 @@ type SignUpForm = z.infer<typeof signUp>
 
 export function SignUp() {
   const { register, handleSubmit, formState } = useForm<SignUpForm>({})
-
+  const navigate = useNavigate()
   async function handleSignUp(data: SignUpForm) {
     console.log(data)
-    toast.success('Enviamos um link')
+    toast.success('Enviamos um link', {
+      action: {
+        label: 'Login',
+        onClick: () => navigate('sign-in'),
+      },
+    })
     await new Promise((resolve) => setTimeout(resolve, 2000))
   }
 
