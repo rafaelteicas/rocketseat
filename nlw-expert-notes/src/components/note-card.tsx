@@ -5,9 +5,11 @@ import { X } from 'lucide-react';
 
 type NoteCardProps = {
     note: {
+        id: string,
         date: Date,
         content: string
     }
+    onNoteDeleted: (id: string) => void
 }
 
 export function NoteCard(props: NoteCardProps) {
@@ -28,7 +30,7 @@ export function NoteCard(props: NoteCardProps) {
 
             <Dialog.Portal>
                 <Dialog.Overlay className="inset-0 fixed bg-black/60" />
-                <Dialog.DialogContent className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 max-w-[650px] w-full bg-slate-700 rounded-md flex flex-col outline-none h-[60vh] overflow-hidden">
+                <Dialog.DialogContent className="inset-0 md:inset-auto fixed md:left-1/2 md:top-1/2 -translate-x-1/2 -translate-y-1/2 max-w-[650px] w-full bg-slate-700 rounded-md flex flex-col outline-none h-[60vh] overflow-hidden">
                     <Dialog.Close className="absolute right-0 top-0 bg-salte-800 p-1.5 text-slate-400 hover:text-slate-100">
                         <X className="size-5" />
                     </Dialog.Close>
@@ -43,8 +45,9 @@ export function NoteCard(props: NoteCardProps) {
                         <p className="text-sm leading-6 text-slate-300">
                             {props.note.content}
                         </p>
-                    </div>
+                    </div>z
                     <button
+                        onClick={() => props.onNoteDeleted(props.note.id)}
                         type="button"
                         className="w-full bg-slate-800 py-4 text-center text-sm text-slate-300 outline-none group"
                     >
