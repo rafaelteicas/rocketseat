@@ -1,0 +1,45 @@
+.wrapper {
+  max-width: 70rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.wrapper form {
+  display: flex;
+  flex: 1;
+  gap: 1rem;
+  transform: translateY(-50%);
+}
+
+.counter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.counter aside {
+  color: var(--blue);
+  font-weight: bold;
+  font-size: 0.875rem;
+}
+
+.counter aside span {
+  background-color: var(--gray-400);
+  color: var(--gray-100);
+  margin-left: 10px;
+  font-size: 0.75rem;
+  padding: 2px 12px;
+  border-radius: 999px;
+}
+
+.counter aside:nth-child(2) {
+  color: var(--purple);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+}
