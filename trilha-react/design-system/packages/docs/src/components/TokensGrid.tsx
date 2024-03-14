@@ -2,17 +2,17 @@ import '../styles/tokens-grid.css'
 
 interface TokensGridProps {
   tokens: Record<string, string>
-  hasRemValue?: boolean
+  hasHamValue?: boolean
 }
 
-export function TokensGrid({ tokens, hasRemValue = false }: TokensGridProps) {
+export function TokensGrid({ tokens, hasHamValue = false }: TokensGridProps) {
   return (
     <table className="tokens-grid">
       <thead>
         <tr>
           <th>Name</th>
           <th>Value</th>
-          {hasRemValue && <th>Pixels</th>}
+          {hasHamValue && <th>Pixels</th>}
         </tr>
       </thead>
       <tbody>
@@ -21,7 +21,9 @@ export function TokensGrid({ tokens, hasRemValue = false }: TokensGridProps) {
             <tr key={key}>
               <td>{key}</td>
               <td>{value}</td>
-              {hasRemValue && <td>{Number(value.replace('rem', '')) * 16}</td>}
+              {hasHamValue && (
+                <td>{Number(value.replace('rem', ' ')) * 16}px</td>
+              )}
             </tr>
           )
         })}

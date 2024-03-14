@@ -1,29 +1,29 @@
 {
-    "name": "@ignite-ui/react",
-    "version": "1.0.0",
-    "description": "",
-    "main": "./dist/index.js",
-    "module": "./dist/index.mjs",
-    "types": "./dist/index.d.ts",
-    "scripts": {
-        "build": "tsup src/index.tsx --format esm,cjs --dts --external react",
-        "dev": "tsup src/index.tsx --format esm,cjs --dts --external react --watch",
-        "lint": "eslint src/**/*.ts* --fix"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "devDependencies": {
-        "@ignite-ui/eslint-config": "*",
-        "@ignite-ui/tokens": "*",
-        "@ignite-ui/ts-config": "*",
-        "@types/react": "^18.2.55",
-        "@types/react-dom": "^18.2.19",
-        "react": "^18.2.0",
-        "tsup": "^8.0.2",
-        "typescript": "^5.3.3"
-    },
-    "dependencies": {
-        "@stitches/react": "^1.2.8"
-    }
+  "name": "@rafaelteicas-ignite-ui/react",
+  "version": "3.0.0",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup src/index.tsx --format esm,cjs --dts --external react",
+    "dev": "tsup src/index.tsx --format esm,cjs --dts --external react --watch",
+    "lint": "eslint src/**/*.ts* --fix"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "@rafaelteicas-ignite-ui/eslint-config": "*",
+    "@rafaelteicas-ignite-ui/tokens": "*",
+    "@rafaelteicas-ignite-ui/ts-config": "*",
+    "@types/react": "^18.2.65",
+    "@types/react-dom": "^18.2.22",
+    "react": "^18.2.0",
+    "tsup": "^8.0.2",
+    "typescript": "^5.4.2"
+  },
+  "dependencies": {
+    "@radix-ui/react-avatar": "^1.0.4",
+    "@radix-ui/react-checkbox": "^1.0.4",
+    "@stitches/react": "^1.2.8",
+    "phosphor-react": "^1.4.1"
+  }
 }
