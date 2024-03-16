@@ -3,15 +3,20 @@ import { ArticleHeaderActions, ArticleHeaderContainer } from './styles'
 import {
   faAngleLeft,
   faArrowUpRightFromSquare,
+  faCalendar,
+  faComment,
 } from '@fortawesome/free-solid-svg-icons'
 import { faGithub } from '@fortawesome/free-brands-svg-icons'
 import { useNavigate } from 'react-router-dom'
+import { formatDistanceToNowStrict } from 'date-fns'
+import { ptBR } from 'date-fns/locale'
 
 interface ArticleHeaderProps {
   title: string
   url: string
   user: string
   comments: number
+  date: string
 }
 
 export function ArticleHeader({
@@ -19,6 +24,7 @@ export function ArticleHeader({
   url,
   user,
   comments,
+  date,
 }: ArticleHeaderProps) {
   const navigate = useNavigate()
 
@@ -33,7 +39,7 @@ export function ArticleHeader({
           <FontAwesomeIcon icon={faAngleLeft} />
           Voltar
         </a>
-        <a href={url}>
+        <a href={url} target="_blank" rel="noreferrer">
           Ver no Github
           <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
         </a>
@@ -45,10 +51,15 @@ export function ArticleHeader({
           {user}
         </p>
         <p>
-          <FontAwesomeIcon icon={faGithub} />
-          Rocketseat
+          <FontAwesomeIcon icon={faCalendar} />
+          {formatDistanceToNowStrict(date, { locale: ptBR })}
         </p>
-        {comments && <p>{comments} comentários</p>}
+        {comments > 0 && (
+          <p>
+            <FontAwesomeIcon icon={faComment} />
+            {comments} comentários
+          </p>
+        )}
       </footer>
     </ArticleHeaderContainer>
   )

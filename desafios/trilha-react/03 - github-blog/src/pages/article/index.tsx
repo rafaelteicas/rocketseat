@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { ArticleHeader } from '../../components/article-header'
 import { ArticleContainer } from './styles'
 import { useParams } from 'react-router-dom'
-import ReactMarkdown from 'react-markdown'
+import { Markdown } from '../../components/markdown'
 
 interface ArticleDataType {
   body: string
@@ -12,6 +12,7 @@ interface ArticleDataType {
     login: string
   }
   comments: number
+  created_at: string
 }
 
 export function Article() {
@@ -37,9 +38,10 @@ export function Article() {
           comments={articleData.comments}
           url={articleData.html_url}
           user={articleData.user.login}
+          date={articleData.created_at}
         />
         <ArticleContainer>
-          <ReactMarkdown>{articleData.body}</ReactMarkdown>
+          <Markdown>{articleData.body}</Markdown>
         </ArticleContainer>
       </div>
     )

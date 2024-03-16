@@ -17,7 +17,7 @@ export const CardContainer = styled(Link, {
 
   aside: {
     display: 'flex',
-    alignItems: 'baseline',
+    alignItems: 'center',
     justifyContent: 'space-between',
   },
 
@@ -33,7 +33,7 @@ export const CardContainer = styled(Link, {
     overflow: 'hidden',
     textOverflow: 'ellipsis',
     '-webkit-box-orient': 'vertical',
-    '-webkit-line-clamp': 4,
+    '-webkit-line-clamp': 5,
     display: '-webkit-box',
   },
 
@@ -45,4 +45,9 @@ export const CardContainer = styled(Link, {
   '&:hover': {
     boxShadow: '0px 0px 0px 2px $colors$baseLabel',
   },
+})
+
+export const CardContent = styled('div', {
+  display: 'flex',
+  overflow: 'hidden',
 })

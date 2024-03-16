@@ -9,11 +9,21 @@ export const PostsContainer = styled('section', {
   display: 'flex',
   flexDirection: 'column',
 
-  h3: {
-    fontSize: '$xl',
-    fontWeight: 'bold',
-    color: '$baseSubtitle',
-    marginBottom: '$sm',
+  header: {
+    display: 'flex',
+    justifyContent: 'space-between',
+
+    h3: {
+      fontSize: '$xl',
+      fontWeight: 'bold',
+      color: '$baseSubtitle',
+      marginBottom: '$sm',
+    },
+
+    p: {
+      fontSize: '$md',
+      color: '$baseSpan',
+    },
   },
 })
 

@@ -1,5 +1,11 @@
+import { InputHTMLAttributes, forwardRef } from 'react'
 import { InputContainer } from './styles'
 
-export function Input() {
-  return <InputContainer placeholder="Buscar conteúdo" />
-}
+export const Input = forwardRef<
+  HTMLInputElement,
+  InputHTMLAttributes<HTMLInputElement>
+>((props, ref) => {
+  return <InputContainer ref={ref} placeholder="Buscar conteúdo" {...props} />
+})
+
+Input.displayName = 'Input'

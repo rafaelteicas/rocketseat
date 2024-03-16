@@ -41,6 +41,8 @@ export const ArticleHeaderActions = styled('div', {
     display: 'flex',
     alignItems: 'center',
     gap: '0.5rem',
+    color: '$blue',
+    textDecoration: 'none',
 
     '&:hover': {
       textDecoration: 'underline',

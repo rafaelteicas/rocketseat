@@ -1,6 +1,7 @@
-import { formatDistanceToNow, parseISO } from 'date-fns'
-import { CardContainer } from './styles'
+import { formatDistanceToNowStrict } from 'date-fns'
+import { CardContainer, CardContent } from './styles'
 import { ptBR } from 'date-fns/locale/pt-BR'
+import { Markdown } from '../markdown'
 
 interface CardProps {
   id: number
@@ -14,9 +15,16 @@ export function Card({ id, body, time, title }: CardProps) {
     <CardContainer to={`/article/${id}`}>
       <aside>
         <h2>{title}</h2>
-        <span>Há {formatDistanceToNow(parseISO(time), { locale: ptBR })}</span>
+        <span>
+          Há{' '}
+          {formatDistanceToNowStrict(time, {
+            locale: ptBR,
+          })}
+        </span>
       </aside>
-      <p>{body}</p>
+      <CardContent>
+        <Markdown>{body}</Markdown>
+      </CardContent>
     </CardContainer>
   )
 }
