@@ -8,6 +8,7 @@ import { z } from 'zod'
 import { useRouter } from 'next/router'
 import { api } from '../../lib/axios'
 import { AxiosError } from 'axios'
+import { useSession } from 'next-auth/react'
 
 const registerFormSchema = z.object({
   username: z
@@ -31,8 +32,9 @@ export default function Register() {
   } = useForm<RegisterFormData>({
     resolver: zodResolver(registerFormSchema),
   })
-
+  const session = useSession()
   const router = useRouter()
+  console.log(session)
 
   useEffect(() => {
     if (router.query.username) {
@@ -46,6 +48,7 @@ export default function Register() {
         name: data.username,
         username: data.username,
       })
+      await router.push('/register/connect-calendar')
     } catch (err) {
       if (err instanceof AxiosError && err.response?.data?.message) {
         alert(err.response.data.message)
@@ -67,6 +70,7 @@ export default function Register() {
       <Form as="form" onSubmit={handleSubmit(handleRegister)}>
         <label>
           <Text>Nome de usuário</Text>
+          {/* @ts-expect-error */}
           <TextInput
             prefix="ignite.com/"
             placeholder="seu-usuario"
@@ -79,6 +83,7 @@ export default function Register() {
 
         <label>
           <Text>Nome completo</Text>
+          {/* @ts-expect-error */}
           <TextInput placeholder="Seu nome" {...register('name')} />
           {errors.name && (
             <FormError size="sm">{errors.name.message}</FormError>
