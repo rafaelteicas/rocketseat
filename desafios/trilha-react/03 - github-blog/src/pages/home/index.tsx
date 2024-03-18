@@ -1,8 +1,8 @@
-import { useEffect, useMemo, useState } from 'react'
-import { Card } from '../../components/card'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import { PostCard } from './components/card'
 import { Input } from '../../components/input'
-import { Profile } from '../../components/profile'
 import { HomeContainer, PostsContainer, PostsContent } from './styles'
+import { Profile } from './components/profile'
 
 interface ArticleType {
   number: number
@@ -12,92 +12,73 @@ interface ArticleType {
   created_at: string
 }
 
-interface UserDataProps {
-  name: string
-  login: string
-  avatar_url: string
-  html_url: string
-  bio: string
-  followers: number
-}
-
 export function Home() {
-  const [userData, setUserData] = useState<UserDataProps>({} as UserDataProps)
   const [articles, setArticles] = useState<ArticleType[]>([])
   const [searchInput, setSearchInput] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     getArticles().then((article) => setArticles(article.items))
-    getUser().then((user) => setUserData(user))
   }, [])
 
-  const getArticles = useMemo(
-    () => async () => {
+  const getArticles = useCallback(async () => {
+    try {
+      setIsLoading(true)
       const url = decodeURIComponent(
         'https://api.github.com/search/issues?' +
           new URLSearchParams({
             q: 'repo:rafaelteicas/rocketseat',
           }),
       )
-      const response = await fetch(url, {
-        cache: 'no-cache',
-      })
+      const response = await fetch(url)
 
-      return response.json()
-    },
-    [],
-  )
+      const articles = await response.json()
 
-  const getUser = useMemo(
-    () => async () => {
-      const response = await fetch(
-        'https://api.github.com/users/rafaelteicas',
-        {
-          cache: 'no-cache',
-        },
-      )
-      return response.json()
-    },
-    [],
-  )
+      return articles
+    } catch (er) {
+      console.log(er)
+    } finally {
+      setIsLoading(false)
+    }
+  }, [])
 
   const filteredData = useMemo(() => {
-    return articles.filter((article) => {
-      return article.title.toLowerCase().includes(searchInput.toLowerCase())
-    })
-  }, [searchInput, articles])
+    if (searchInput) {
+      return articles.filter((article) =>
+        article.title.toLowerCase().includes(searchInput.toLowerCase()),
+      )
+    }
+    return articles
+  }, [articles, searchInput])
 
   return (
     <HomeContainer>
-      <Profile
-        name={userData.name}
-        avatarUrl={userData.avatar_url}
-        profileUrl={userData.html_url}
-        bio={userData.bio}
-        login={userData.login}
-        followers={userData.followers}
-      />
-      <PostsContainer>
-        <header>
-          <h3>Publicações</h3>
-          <p>{articles.length} publicações</p>
-        </header>
-        <Input
-          value={searchInput}
-          onChange={(e) => setSearchInput(e.target.value)}
-        />
-        <PostsContent>
-          {filteredData.map((article) => (
-            <Card
-              key={article.number}
-              title={article.title}
-              id={article.number}
-              body={article.body}
-              time={article.created_at}
-            />
-          ))}
-        </PostsContent>
-      </PostsContainer>
+      {isLoading ? (
+        <b>Carregando</b>
+      ) : (
+        <PostsContainer>
+          <Profile />
+          <div className="postsInfo">
+            <h3>Publicações</h3>
+            <p>{articles.length} publicações</p>
+          </div>
+          <Input
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+          />
+          <PostsContent>
+            {filteredData.map((article) => (
+              <PostCard
+                key={article.number}
+                title={article.title}
+                id={article.number}
+                body={article.body}
+                time={article.created_at}
+              />
+            ))}
+          </PostsContent>
+        </PostsContainer>
+      )}
     </HomeContainer>
   )
 }

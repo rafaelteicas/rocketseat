@@ -1,19 +1,19 @@
 import { formatDistanceToNowStrict } from 'date-fns'
-import { CardContainer, CardContent } from './styles'
+import { PostCardContainer, CardContent } from './styles'
 import { ptBR } from 'date-fns/locale/pt-BR'
-import { Markdown } from '../markdown'
+import { Markdown } from '../../../../components/markdown'
 
-interface CardProps {
+interface PostCardProps {
   id: number
   title: string
   time: string
   body: string
 }
 
-export function Card({ id, body, time, title }: CardProps) {
+export function PostCard({ id, body, time, title }: PostCardProps) {
   return (
-    <CardContainer to={`/article/${id}`}>
-      <aside>
+    <PostCardContainer to={`/article/${id}`}>
+      <header>
         <h2>{title}</h2>
         <span>
           Há{' '}
@@ -21,10 +21,10 @@ export function Card({ id, body, time, title }: CardProps) {
             locale: ptBR,
           })}
         </span>
-      </aside>
+      </header>
       <CardContent>
         <Markdown>{body}</Markdown>
       </CardContent>
-    </CardContainer>
+    </PostCardContainer>
   )
 }

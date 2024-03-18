@@ -1,4 +1,4 @@
-import { styled } from '../../styles'
+import { styled } from '../../../../styles'
 
 export const ProfileContainer = styled('header', {
   display: 'flex',
@@ -7,7 +7,12 @@ export const ProfileContainer = styled('header', {
   padding: '2rem',
   borderRadius: 8,
   gap: '2rem',
-  transform: 'translate(0, -40%)',
+  marginTop: 'calc(-212px * 0.4)',
+
+  '@media (max-width:768px)': {
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
 
   img: {
     width: 148,
@@ -23,7 +28,6 @@ export const ProfileContent = styled('div', {
 
   header: {
     display: 'flex',
-    flex: 1,
     flexDirection: 'column',
   },
 
@@ -31,6 +35,7 @@ export const ProfileContent = styled('div', {
     display: 'flex',
     alignItems: 'center',
     gap: '1rem',
+    marginTop: 'auto',
 
     p: {
       display: 'flex',

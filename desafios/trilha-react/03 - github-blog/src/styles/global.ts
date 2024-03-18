@@ -10,9 +10,6 @@ export const globalStyles = globalCss({
   body: {
     background: '$baseBackground',
     color: '$baseText',
-    maxWidth: '1440px',
-    margin: '0 auto',
-    padding: '0 18rem $5xl',
     '-webkit-font-smoothing': 'antialiased',
   },
 
@@ -26,6 +23,4 @@ export const globalStyles = globalCss({
     lineHeight: 1.6,
     fontWeight: '$regular',
   },
-
-  h1: { color: '$baseTitle', fontSize: '$3xl', fontWeight: '$bold' },
 })

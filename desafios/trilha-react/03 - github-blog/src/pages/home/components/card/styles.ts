@@ -1,7 +1,7 @@
-import { styled } from '../../styles'
+import { styled } from '../../../../styles'
 import { Link } from 'react-router-dom'
 
-export const CardContainer = styled(Link, {
+export const PostCardContainer = styled(Link, {
   padding: '2rem 2rem',
   backgroundColor: '$basePost',
   height: 260,
@@ -15,7 +15,7 @@ export const CardContainer = styled(Link, {
   flexDirection: 'column',
   flex: 1,
 
-  aside: {
+  '> header': {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',

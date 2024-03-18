@@ -8,9 +8,16 @@ export const Markdown = styled(ReactMarkdown, {
     borderRadius: 2,
     overflow: 'hidden',
     whiteSpace: 'pre-wrap',
+    fontSize: '$lg',
   },
-  ol: {
-    paddingLeft: '2rem',
-    fontSize: '$md',
+
+  p: {
+    marginBottom: '$xl',
+  },
+
+  h3: {
+    color: '$blue',
+    textDecoration: 'underline',
+    fontWeight: '$regular',
   },
 })

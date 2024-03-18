@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { ArticleHeader } from '../../components/article-header'
+import { ArticleHeader } from './components/article-header'
 import { ArticleContainer } from './styles'
 import { useParams } from 'react-router-dom'
 import { Markdown } from '../../components/markdown'

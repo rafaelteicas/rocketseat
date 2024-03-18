@@ -1,17 +1,18 @@
 import { styled } from '../../styles'
 
-export const HomeContainer = styled('main', {
+export const HomeContainer = styled('section', {
   display: 'flex',
   flexDirection: 'column',
 })
 
-export const PostsContainer = styled('section', {
+export const PostsContainer = styled('div', {
   display: 'flex',
   flexDirection: 'column',
 
-  header: {
+  'div[class="postsInfo"]': {
     display: 'flex',
     justifyContent: 'space-between',
+    marginTop: '4.5rem',
 
     h3: {
       fontSize: '$xl',
@@ -29,7 +30,13 @@ export const PostsContainer = styled('section', {
 
 export const PostsContent = styled('div', {
   display: 'grid',
-  gridTemplateColumns: '1fr 1fr',
+  gridTemplateColumns: 'repeat(2, 1fr)',
   gap: '$4xl',
   marginTop: '$5xl',
+
+  '@media (max-width: 768px)': {
+    display: 'flex',
+    flexDirection: 'column',
+    maxHeight: 260,
+  },
 })
