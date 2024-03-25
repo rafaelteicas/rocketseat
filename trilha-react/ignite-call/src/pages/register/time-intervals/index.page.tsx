@@ -21,6 +21,9 @@ import { Controller, useFieldArray, useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { getWeekDays } from '../../../utils/get-week-days'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { convertTimeStringToMinutes } from '../../../utils/convert-time-string-to-minutes'
+import { api } from '../../../lib/axios'
+import { useRouter } from 'next/router'
 
 const timeIntervalsFormSchema = z.object({
   intervals: z
@@ -36,10 +39,28 @@ const timeIntervalsFormSchema = z.object({
     .transform((intervals) => intervals.filter((interval) => interval.enabled))
     .refine((intervals) => intervals.length > 0, {
       message: 'É necessário selecionar pelo menos um dia na semana',
-    }),
+    })
+    .transform((intervals) =>
+      intervals.map((interval) => ({
+        weekDay: interval.weekDay,
+        startTimeInMinutes: convertTimeStringToMinutes(interval.startTime),
+        endTimeInMinutes: convertTimeStringToMinutes(interval.endTime),
+      })),
+    )
+    .refine(
+      (intervals) =>
+        intervals.every(
+          (interval) =>
+            interval.endTimeInMinutes - 60 >= interval.startTimeInMinutes,
+        ),
+      {
+        message: 'A hora de término deve ser maior que a hora de início',
+      },
+    ),
 })
 
-type TimeIntervalsFormSchema = z.infer<typeof timeIntervalsFormSchema>
+type TimeIntervalsFormInput = z.input<typeof timeIntervalsFormSchema>
+type TimeIntervalsFormOutput = z.output<typeof timeIntervalsFormSchema>
 
 export default function TimeIntervals() {
   const {
@@ -48,7 +69,7 @@ export default function TimeIntervals() {
     register,
     handleSubmit,
     watch,
-  } = useForm<TimeIntervalsFormSchema>({
+  } = useForm<TimeIntervalsFormInput>({
     resolver: zodResolver(timeIntervalsFormSchema),
     defaultValues: {
       intervals: [
@@ -69,8 +90,12 @@ export default function TimeIntervals() {
   })
 
   const intervals = watch('intervals')
+  const router = useRouter()
 
-  function handleSetTimeIntervals() {}
+  async function handleSetTimeIntervals(data: TimeIntervalsFormOutput) {
+    await api.post('/users/time-intervals', data)
+    await router.push('/register/update-profile')
+  }
 
   const weekDays = getWeekDays()
 
@@ -84,6 +109,7 @@ export default function TimeIntervals() {
         </Text>
         <MultiStep size={4} currentStep={3} />
       </Header>
+      {/* @ts-expect-error */}
       <IntervalBox as="form" onSubmit={handleSubmit(handleSetTimeIntervals)}>
         <IntervalsContainer>
           {fields.map((field, index) => (
