@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Nunito } from 'next/font/google'
 import './globals.css'
+import { Providers } from './providers'
 
 const nunito = Nunito({ subsets: ['latin'] })
 
@@ -15,12 +16,14 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="pt-BR">
-      <body
-        className={`${nunito.className} bg-gray-800 text-gray-200 min-h-screen box-border`}
-      >
-        {children}
-      </body>
-    </html>
+    <Providers>
+      <html lang="pt-BR">
+        <body
+          className={`${nunito.className} bg-gray-800 text-gray-200 min-h-screen box-border`}
+        >
+          {children}
+        </body>
+      </html>
+    </Providers>
   )
 }
