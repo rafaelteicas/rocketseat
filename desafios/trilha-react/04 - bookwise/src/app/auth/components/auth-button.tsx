@@ -15,7 +15,7 @@ export function AuthButton({ src, title, onClick }: Props) {
       onClick={onClick}
       className="bg-gray-600 flex flex-row items-center py-5 px-6 rounded-lg gap-5 max-h-[72px] w-[372px] hover:bg-gray-700"
     >
-      <Image src={src} width={34} height={34} alt="Google Icon" />
+      <Image src={src} width={34} height={34} alt={title} />
       <Text preset="buttonLarge">{title}</Text>
     </button>
   )

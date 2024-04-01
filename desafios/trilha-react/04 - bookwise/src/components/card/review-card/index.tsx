@@ -10,7 +10,7 @@ interface ReviewCardProps {
   author: string
   date: string
   rating: number
-  description: number
+  description: string
   avatar: string
   book: {
     name: string
@@ -27,8 +27,6 @@ export function ReviewCard({
   avatar,
   description,
 }: ReviewCardProps) {
-  console.log(book)
-
   return (
     <div className="bg-gray-700 p-6 rounded-lg ">
       <header className="pb-7 flex flex-row gap-4">

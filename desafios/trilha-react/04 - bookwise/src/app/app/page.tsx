@@ -1,51 +1,39 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 
+import { useGetPopularBooks } from '@/api/usecases/use-get-popular-books'
+import { useGetReviews } from '@/api/usecases/use-get-reviews'
 import { PopularBooksCard } from '@/components/card/popular-books-card'
 import { ReviewCard } from '@/components/card/review-card'
 import { Text } from '@/components/text'
-import { api } from '@/lib/axios'
 import { ChartLineUp } from '@phosphor-icons/react'
-import { useQuery } from '@tanstack/react-query'
 
 export default function Home() {
-  const { data, isLoading } = useQuery<any, Error, any[]>({
-    queryKey: ['get-reviews'],
-    queryFn: async () => {
-      const response = await api.get('/books/reviews')
-      return response.data.ratings
-    },
-  })
+  const { reviews, isLoading } = useGetReviews()
 
-  const { data: popularBooks } = useQuery<any, Error, any>({
-    queryKey: ['get-popular-books'],
-    queryFn: async () => {
-      const response = await api.get('/books/popular')
-      return response.data.ratings
-    },
-  })
+  const { popularBooks } = useGetPopularBooks()
 
   if (isLoading) {
     return <p>Carregando</p>
   }
 
-  if (data) {
+  if (reviews) {
     return (
       <section className="pt-6 flex flex-col w-full ">
         <Text
           preset="headingLarge"
-          className="flex flex-row gap-3 pb-10 leading-none"
+          className="flex flex-row gap-3 pb-10 leading-none items-center"
         >
           <ChartLineUp size={32} className="fill-green-100" />
           Início
         </Text>
-        <div className="flex gap-8 jusc">
+        <div className="grid grid-cols-[680px_auto] gap-8">
           <div className="flex flex-col flex-1">
             <Text preset="textSmall" className="mb-4">
               Avaliações mais recentes
             </Text>
             <div className="flex flex-col gap-3">
-              {data.map((review) => (
+              {reviews.map((review) => (
                 <ReviewCard
                   key={review.id}
                   author={review.user.name}
@@ -67,13 +55,15 @@ export default function Home() {
                 Ver todos
               </Text>
             </div>
-            {popularBooks && (
+            {popularBooks?.map((book) => (
               <PopularBooksCard
-                author={popularBooks.author}
-                title={popularBooks.name}
-                rate={popularBooks.rating}
+                key={book.id}
+                author={book.author}
+                title={book.name}
+                image={book.cover_url}
+                rate={4}
               />
-            )}
+            ))}
           </div>
         </div>
       </section>

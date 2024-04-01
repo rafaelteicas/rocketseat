@@ -28,6 +28,8 @@ const config: Config = {
       'gray-600': '#252D4A',
       'gray-700': '#181C2A',
       'gray-800': '#0E1116',
+
+      danger: '#F75A68',
     },
   },
   plugins: [],

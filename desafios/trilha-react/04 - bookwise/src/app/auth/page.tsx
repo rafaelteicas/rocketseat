@@ -3,8 +3,11 @@ import Image from 'next/image'
 import { cover, github, google, rocket } from '../../assets'
 import { signIn } from 'next-auth/react'
 import { AuthButton } from './components/auth-button'
+import { useRouter } from 'next/navigation'
 
 export default function Home() {
+  const router = useRouter()
+
   function handleSignInGoogle() {
     signIn('google', {
       callbackUrl: '/app',
@@ -46,11 +49,11 @@ export default function Home() {
             src={github}
             title="Entrar com GitHub"
             onClick={() => {}}
-          />{' '}
+          />
           <AuthButton
             src={rocket}
             title="Acessar como visitante"
-            onClick={() => {}}
+            onClick={() => router.push('/app')}
           />
         </div>
       </div>

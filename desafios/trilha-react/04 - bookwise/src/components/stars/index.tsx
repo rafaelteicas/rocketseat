@@ -9,6 +9,10 @@ interface Props {
 }
 
 export function Stars({ rating, className }: Props) {
+  if (!rating) {
+    return null
+  }
+
   if (rating > 5) {
     rating = 5
   }
