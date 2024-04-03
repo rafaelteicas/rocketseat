@@ -25,19 +25,19 @@ export function Text({ preset, className, children }: Props) {
 function getTextPreset(preset: TextsPresets) {
   switch (preset) {
     case 'headingLarge':
-      return 'text-2xl font-bold leading-14'
+      return 'text-2xl font-bold leading-snug'
     case 'headingMedium':
-      return 'text-xl font-bold leading-14'
+      return 'text-xl font-bold leading-snug'
     case 'headingSmall':
-      return 'text-lg font-bold leading-14'
+      return 'text-lg font-bold leading-snug'
     case 'headingExtraSmall':
-      return 'text-base font-bold leading-14'
+      return 'text-base font-bold leading-snug'
     case 'textLarge':
       return 'text-xl leading-4	font-medium'
     case 'textMedium':
       return 'text-base leading-4	font-medium'
     case 'textSmall':
-      return 'text-sm	leading-4 font-medium'
+      return 'text-sm	leading-relaxed font-regular'
     case 'buttonLarge':
       return 'text-lg	font-medium'
     case 'buttonMedium':

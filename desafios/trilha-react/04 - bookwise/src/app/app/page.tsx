@@ -58,6 +58,7 @@ export default function Home() {
             {popularBooks?.map((book) => (
               <PopularBooksCard
                 key={book.id}
+                bookId={book.id}
                 author={book.author}
                 title={book.name}
                 image={book.cover_url}

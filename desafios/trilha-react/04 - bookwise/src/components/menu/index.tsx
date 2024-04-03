@@ -13,7 +13,7 @@ import { Avatar } from '../avatar'
 export interface NavProps {
   name: string
   path: string
-  icon: 'chartLineUp' | 'binoculars'
+  icon: 'chartLineUp' | 'binoculars' | 'user'
 }
 
 const navLinks: NavProps[] = [
@@ -60,6 +60,9 @@ export function Menu() {
           {navLinks.map(({ icon, name, path }) => (
             <MenuLink icon={icon} path={path} name={name} key={name} />
           ))}
+          {session && (
+            <MenuLink icon="user" path="/app/profile" name={'Perfil'} />
+          )}
         </nav>
       </div>
       <footer className="pb-5">

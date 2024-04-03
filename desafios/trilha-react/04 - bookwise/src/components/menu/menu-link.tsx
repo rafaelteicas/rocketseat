@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { NavProps } from '.'
-import { Binoculars, ChartLineUp } from '@phosphor-icons/react'
+import { Binoculars, ChartLineUp, User } from '@phosphor-icons/react'
 import { Text } from '../../components/text'
 
 export function MenuLink({ icon, path, name }: NavProps) {
@@ -18,7 +18,7 @@ export function MenuLink({ icon, path, name }: NavProps) {
 
   return (
     <Link
-      href={path}
+      href={path || ''}
       className={`group flex flex-row items-center gap-3 ${isActive && selectedItem}`}
     >
       <Icon
@@ -38,4 +38,5 @@ export function MenuLink({ icon, path, name }: NavProps) {
 const icons = {
   chartLineUp: ChartLineUp,
   binoculars: Binoculars,
+  user: User,
 }

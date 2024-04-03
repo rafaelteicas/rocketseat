@@ -1,18 +1,13 @@
 'use client'
-
-import { Star, StarHalf } from '@phosphor-icons/react'
 import React from 'react'
+import { Star, StarHalf } from '@phosphor-icons/react'
 
 interface Props {
   rating: number
   className?: string
 }
 
-export function Stars({ rating, className }: Props) {
-  if (!rating) {
-    return null
-  }
-
+export function Stars({ rating = 1, className }: Props) {
   if (rating > 5) {
     rating = 5
   }

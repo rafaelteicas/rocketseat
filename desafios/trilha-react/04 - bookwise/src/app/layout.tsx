@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
-import { Nunito } from 'next/font/google'
+import { Nunito_Sans } from 'next/font/google'
 import './globals.css'
 import { Providers } from './providers'
 
-const nunito = Nunito({ subsets: ['latin'] })
+const nunito = Nunito_Sans({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'BookWise',

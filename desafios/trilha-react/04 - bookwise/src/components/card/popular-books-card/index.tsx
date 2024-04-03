@@ -1,13 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Image from 'next/image'
 import { Text } from '@/components/text'
 import { Stars } from '@/components/stars'
+import { SidePanelContext } from '@/service/side-panel/side-panel-context'
 
 interface PopularBooksProps {
   title: string
   author: string
   rate: number
   image: string
+  bookId: string
 }
 
 export function PopularBooksCard({
@@ -15,9 +17,15 @@ export function PopularBooksCard({
   rate,
   title,
   image,
+  bookId,
 }: PopularBooksProps) {
+  const { openSidePanel } = useContext(SidePanelContext)
+
   return (
-    <div className="p-4 bg-gray-700 rounded-lg flex flex-row gap-4 mb-4">
+    <button
+      onClick={() => openSidePanel(bookId)}
+      className="p-4 w-full bg-gray-700 rounded-lg border border-gray-700 flex flex-row gap-4 mb-4 text-left flex-1 hover:border hover:border-gray-600"
+    >
       <Image
         src={`/${image}`}
         alt="cover"
@@ -34,6 +42,6 @@ export function PopularBooksCard({
         </Text>
         <Stars rating={rate} className="mt-auto" />
       </div>
-    </div>
+    </button>
   )
 }
