@@ -1,6 +1,7 @@
 'use client'
+
 import Image from 'next/image'
-import { cover, github, google, rocket } from '../../assets'
+import { cover, github, google, rocket, logo } from '../../assets'
 import { signIn } from 'next-auth/react'
 import { AuthButton } from './components/auth-button'
 import { useRouter } from 'next/navigation'
@@ -14,11 +15,17 @@ export default function Home() {
     })
   }
 
+  function handleSignInGitHub() {
+    signIn('github', {
+      callbackUrl: '/app',
+    })
+  }
+
   return (
     <main className="flex items-center justify-evenly ">
       <div className="relative h-screen p-5">
         <Image
-          src={'/brand/logo.svg'}
+          src={logo}
           width={232}
           height={58}
           alt="Logo"
@@ -26,7 +33,7 @@ export default function Home() {
         />
         <Image
           src={cover}
-          className="w-full h-full rounded-[10px]"
+          className="h-full w-full rounded-[10px]"
           quality={100}
           priority
           alt="Cover Image"
@@ -39,7 +46,7 @@ export default function Home() {
             Faça seu login ou acesse como visitante.
           </p>
         </div>
-        <div className="gap-4 flex flex-col">
+        <div className="flex flex-col gap-4">
           <AuthButton
             src={google}
             title="Entrar com Google"
@@ -48,7 +55,7 @@ export default function Home() {
           <AuthButton
             src={github}
             title="Entrar com GitHub"
-            onClick={() => {}}
+            onClick={handleSignInGitHub}
           />
           <AuthButton
             src={rocket}

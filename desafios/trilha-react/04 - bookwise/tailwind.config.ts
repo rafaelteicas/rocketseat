@@ -1,15 +1,14 @@
 import type { Config } from 'tailwindcss'
 
 const config: Config = {
-  content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
-  ],
+  content: ['./src/**/*.tsx'],
   theme: {
     extend: {
-      lineHeight: {
-        14: '14px',
+      gridTemplateColumns: {
+        app: 'minmax(12rem, 18rem) 1fr',
+      },
+      boxShadow: {
+        cardHover: '0 0 0 2px',
       },
     },
     colors: {

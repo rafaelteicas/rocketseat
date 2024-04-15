@@ -1,71 +1,94 @@
 'use client'
 
-import React, { useState } from 'react'
-import { Text } from '@/components/text'
+import React, { useMemo, useState } from 'react'
 import { Binoculars } from '@phosphor-icons/react'
 import { PopularBooksCard } from '@/components/card/popular-books-card'
 import { useGetBooks } from '@/api/usecases/use-get-books'
 import { useGetCategories } from '@/api/usecases/use-get-categories'
 import { useGetBooksByCategory } from '@/api/usecases/use-get-books-by-category'
 import { SearchInput } from '@/components/search-input'
+import { useSession } from 'next-auth/react'
 
 export default function Explore() {
-  const { categories } = useGetCategories()
   const [selectedFilter, setSelectedFilter] = useState<string>('Todos')
+  const [search, setSearch] = useState('')
 
-  const { books } = useGetBooks()
-  const { booksByCategory } = useGetBooksByCategory(selectedFilter)
+  const session = useSession()
+  const { categories } = useGetCategories()
+  const userId = session.data?.user?.id
+  const { books, isLoading } = useGetBooks(userId)
+  const { booksByCategory } = useGetBooksByCategory(selectedFilter, userId)
 
-  const data = selectedFilter === 'Todos' ? books : booksByCategory
+  const data = useMemo(() => {
+    if (search && books) {
+      return books.filter((book) => {
+        return book.name.toLowerCase().includes(search.toLowerCase())
+      })
+    }
+    if (selectedFilter !== 'Todos') {
+      return booksByCategory
+    }
+    if (books) {
+      return books
+    }
+  }, [search, books, selectedFilter, booksByCategory])
+
+  if (isLoading) {
+    return <h1>Carregando</h1>
+  }
 
   return (
     <section className="pt-6">
-      <div className="flex flex-row justify-between items-center pb-10">
-        <Text
-          preset="headingLarge"
-          className="flex flex-1 flex-row gap-3 leading-none items-center"
-        >
+      <div className="flex flex-row items-center justify-between pb-10">
+        <h1 className="flex flex-1 flex-row items-center gap-3 leading-none">
           <Binoculars size={32} className="fill-green-100" />
           Explorar
-        </Text>
-        <SearchInput placeholder="Buscar livro ou autor" />
+        </h1>
+        <SearchInput
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Buscar livro ou autor"
+        />
       </div>
-      <div className="flex gap-2 flex-wrap">
-        {categories?.map((category) => (
-          <button
-            className={
-              category.name === selectedFilter
-                ? $selectedFilter
-                : $unselectedFilter
-            }
-            key={category.id}
-            onClick={() => setSelectedFilter(category.name)}
-          >
-            <Text
-              preset="textMedium"
+
+      <>
+        <div className="flex flex-wrap gap-2">
+          {categories?.map((category) => (
+            <button
               className={
                 category.name === selectedFilter
-                  ? 'text-gray-100'
-                  : 'text-purple-100'
+                  ? $selectedFilter
+                  : $unselectedFilter
               }
+              key={category.id}
+              onClick={() => setSelectedFilter(category.name)}
             >
-              {category.name}
-            </Text>
-          </button>
-        ))}
-      </div>
-      <div className="grid grid-cols-3 pt-12 gap-4">
-        {data?.map((book) => (
-          <PopularBooksCard
-            bookId={book.id}
-            key={book.id}
-            author={book.author}
-            image={book.cover_url}
-            rate={book.rate}
-            title={book.name}
-          />
-        ))}
-      </div>
+              <p
+                className={
+                  'text-base font-medium' + category.name === selectedFilter
+                    ? 'text-gray-100'
+                    : 'text-purple-100'
+                }
+              >
+                {category.name}
+              </p>
+            </button>
+          ))}
+        </div>
+        <div className="grid grid-cols-3 gap-4 pt-12">
+          {data?.map((book) => (
+            <PopularBooksCard
+              bookId={book.id}
+              key={book.id}
+              author={book.author}
+              image={book.cover_url}
+              rate={book.media}
+              title={book.name}
+              alreadyRated={book.rated}
+            />
+          ))}
+        </div>
+      </>
     </section>
   )
 }

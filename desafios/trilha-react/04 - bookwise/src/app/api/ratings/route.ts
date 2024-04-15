@@ -1,19 +1,33 @@
 import { prisma } from '@/lib/prisma'
 
-// interface DataDTO {
-//   rate: number
-//   description: string
-//   bookId: string
-//   userId: string
-// }
-
 export async function POST(request: Request) {
   const data = await request.json()
 
   try {
+    const userHasAlreadyRated = await prisma.rating.findFirst({
+      where: {
+        book: {
+          id: data.bookId,
+          AND: {
+            ratings: {
+              some: {
+                user: {
+                  email: data.userEmail,
+                },
+              },
+            },
+          },
+        },
+      },
+    })
+
+    if (userHasAlreadyRated) {
+      return Response.json({ message: 'User has already rated' })
+    }
+
     await prisma.rating.create({
       data: {
-        rate: data.rate,
+        rate: data.rating,
         description: data.description,
         book: {
           connect: {
@@ -33,6 +47,8 @@ export async function POST(request: Request) {
       status: 201,
     })
   } catch (error) {
+    console.log(error)
+
     return new Response(JSON.stringify(error), {
       status: 500,
     })

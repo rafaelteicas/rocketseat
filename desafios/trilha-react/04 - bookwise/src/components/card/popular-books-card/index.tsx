@@ -1,6 +1,5 @@
 import React, { useContext } from 'react'
 import Image from 'next/image'
-import { Text } from '@/components/text'
 import { Stars } from '@/components/stars'
 import { SidePanelContext } from '@/service/side-panel/side-panel-context'
 
@@ -10,6 +9,7 @@ interface PopularBooksProps {
   rate: number
   image: string
   bookId: string
+  alreadyRated?: boolean
 }
 
 export function PopularBooksCard({
@@ -18,29 +18,33 @@ export function PopularBooksCard({
   title,
   image,
   bookId,
+  alreadyRated,
 }: PopularBooksProps) {
   const { openSidePanel } = useContext(SidePanelContext)
 
   return (
     <button
       onClick={() => openSidePanel(bookId)}
-      className="p-4 w-full bg-gray-700 rounded-lg border border-gray-700 flex flex-row gap-4 mb-4 text-left flex-1 hover:border hover:border-gray-600"
+      className="relative mb-4  w-full flex-1 flex-row gap-4 overflow-hidden rounded-lg bg-gray-700 p-4 text-left hover:shadow-cardHover hover:shadow-gray-600"
     >
-      <Image
-        src={`/${image}`}
-        alt="cover"
-        className="rounded"
-        width={64}
-        height={64}
-      />
-      <div className="flex flex-col">
-        <Text preset="headingExtraSmall" className="text-gray-100">
-          {title}
-        </Text>
-        <Text preset="textSmall" className="text-gray-400">
-          {author}
-        </Text>
-        <Stars rating={rate} className="mt-auto" />
+      {alreadyRated && (
+        <span className="absolute right-0 top-0 rounded-bl-md bg-green-300 px-3 py-1 text-xs font-bold text-green-100">
+          LIDO
+        </span>
+      )}
+      <div className="flex gap-4">
+        <Image
+          src={`/${image}`}
+          alt="cover"
+          className="rounded"
+          width={64}
+          height={64}
+        />
+        <div className="flex flex-1 flex-col">
+          <h4 className="text-gray-100">{title}</h4>
+          <p className="text-gray-400">{author}</p>
+          <Stars rating={rate} className="mt-auto " />
+        </div>
       </div>
     </button>
   )

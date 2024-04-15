@@ -1,0 +1,8 @@
+{
+  "extends": ["@rocketseat/eslint-config/react"],
+  "rules": {
+    "camelcase": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
+    "no-useless-return": "off"
+  }
+}

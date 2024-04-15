@@ -1,0 +1,32 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: #181c2a;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #252d4a;
+}
+
+h1 {
+  @apply text-2xl font-bold leading-snug;
+}
+
+h2 {
+  @apply text-xl font-bold leading-snug;
+}
+
+h3 {
+  @apply text-lg font-bold leading-snug;
+}
+
+h4 {
+  @apply text-base font-bold leading-snug;
+}
+
+p {
+  @apply text-sm font-normal;
+}

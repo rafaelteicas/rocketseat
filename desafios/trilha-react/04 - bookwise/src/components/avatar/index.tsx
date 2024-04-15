@@ -9,7 +9,7 @@ interface AvatarProps {
 export function Avatar({ avatarUri, size = 40 }: AvatarProps) {
   return (
     <div
-      className="bg-gradient-to-bl from-[#7FD1CC] via-[#8CAFE3] to-[#9694F5] p-[2px] rounded-full flex items-center justify-center"
+      className="flex items-center justify-center rounded-full bg-gradient-to-bl from-[#7FD1CC] via-[#8CAFE3] to-[#9694F5] p-[2px]"
       style={{
         maxHeight: size + 2,
         maxWidth: size + 2,

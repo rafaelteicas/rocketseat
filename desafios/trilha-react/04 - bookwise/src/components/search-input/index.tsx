@@ -2,16 +2,15 @@
 import React from 'react'
 import { MagnifyingGlass } from '@phosphor-icons/react'
 
-interface SearchInputProps {
-  placeholder: string
-}
+interface SearchInputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {}
 
-export function SearchInput({ placeholder }: SearchInputProps) {
+export function SearchInput({ ...inputProps }: SearchInputProps) {
   return (
-    <div className="border border-gray-500 flex flex-1 h-12 rounded-[4px] items-center p-4 ">
+    <div className="flex h-12 flex-1 items-center rounded-[4px] border border-gray-500 p-4 ">
       <input
-        className="bg-[transparent] flex-1 outline-none text-sm text-gray-400 placeholder:text-sm placeholder:text-gray-400"
-        placeholder={placeholder}
+        className="flex-1 bg-[transparent] text-sm text-gray-400 outline-none placeholder:text-sm placeholder:text-gray-400"
+        {...inputProps}
       />
       <MagnifyingGlass size={20} className="fill-gray-500" />
     </div>

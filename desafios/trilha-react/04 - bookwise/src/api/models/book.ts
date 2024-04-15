@@ -6,5 +6,12 @@ export interface BookModel {
   cover_url: string // 'images/books/o-hobbit.png'
   total_pages: number // 360
   created_at: string // '2024-03-25T21:08:39.341Z'
-  rate: number // 4
+  ratings: [
+    {
+      rate: string
+      userId: string
+    },
+  ]
+  media: number
+  rated: boolean
 }

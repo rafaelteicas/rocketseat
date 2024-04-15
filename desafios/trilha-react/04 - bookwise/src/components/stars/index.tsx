@@ -1,6 +1,7 @@
 'use client'
 import React from 'react'
 import { Star, StarHalf } from '@phosphor-icons/react'
+import { cn } from '@/utils/cn'
 
 interface Props {
   rating: number
@@ -22,7 +23,7 @@ export function Stars({ rating = 1, className }: Props) {
   const emptyStars = Array.from(Array(emptyStarsLength).keys())
 
   return (
-    <div className={`flex flex-row ${className}`}>
+    <div className={cn('flex flex-row', className)}>
       {starts.map((star) => (
         <Star weight="fill" size={16} key={star} className="fill-purple-100" />
       ))}

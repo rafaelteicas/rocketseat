@@ -1,12 +1,13 @@
-import { Text } from '@/components/text'
 import Image from 'next/image'
 import React from 'react'
 import { Avatar } from '@/components/avatar'
 import { Stars } from '@/components/stars'
 import { formatDistanceToNowStrict } from 'date-fns'
 import { ptBR } from 'date-fns/locale/pt-BR'
+import Link from 'next/link'
 
 interface ReviewCardProps {
+  userId: string
   author: string
   date: string
   rating: number
@@ -20,6 +21,7 @@ interface ReviewCardProps {
 }
 
 export function ReviewCard({
+  userId,
   author,
   book,
   date,
@@ -28,17 +30,17 @@ export function ReviewCard({
   description,
 }: ReviewCardProps) {
   return (
-    <div className="bg-gray-700 p-6 rounded-lg ">
-      <header className="pb-7 flex flex-row gap-4">
-        <Avatar avatarUri={avatar} />
-        <div className="flex items-baseline flex-col flex-1">
-          <Text preset="textMedium" className="mb-2">
-            {author}
-          </Text>
-          <Text preset="textSmall" className="text-gray-400">
-            {formatDistanceToNowStrict(date, { locale: ptBR })}
-          </Text>
-        </div>
+    <div className="rounded-lg bg-gray-700 p-6 ">
+      <header className="flex flex-row pb-7">
+        <Link href={`/app/profile/${userId}`} className="flex flex-1 gap-4 ">
+          <Avatar avatarUri={avatar} />
+          <div className="flex flex-1 flex-col items-baseline">
+            <p className="mb-2 text-base font-medium leading-4">{author}</p>
+            <p className="text-gray-400">
+              {formatDistanceToNowStrict(date, { locale: ptBR })}
+            </p>
+          </div>
+        </Link>
         <Stars rating={rating} />
       </header>
       <div>
@@ -51,15 +53,9 @@ export function ReviewCard({
             className="rounded"
           />
           <div className="flex flex-col">
-            <Text preset="headingExtraSmall" className="mb-2">
-              {book.author}
-            </Text>
-            <Text preset="textSmall" className="text-gray-400">
-              {book.name}
-            </Text>
-            <Text preset="textSmall" className="text-gray-300 mt-4">
-              {description}
-            </Text>
+            <h4 className="mb-2">{book.author}</h4>
+            <p className="text-gray-400">{book.name}</p>
+            <p className="mt-4 text-gray-300">{description}</p>
           </div>
         </div>
       </div>
