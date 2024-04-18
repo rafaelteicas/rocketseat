@@ -20,7 +20,7 @@ export function Sidebar() {
   const session = useSession()
 
   function handleSignOut() {
-    signOut({ callbackUrl: '/auth' })
+    signOut({ callbackUrl: '/' })
   }
 
   return (
