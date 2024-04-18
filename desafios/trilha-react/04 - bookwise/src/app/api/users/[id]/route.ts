@@ -49,16 +49,6 @@ export async function GET(
 
   const authors = new Set(user.ratings.map((rate) => rate.book.author)).size
 
-  const category = user.ratings.map((rate) =>
-    rate.book.categories.map((category) => category.category.name),
-  )
-
-  category.forEach((category, i) => {
-    if (category[i] === category) {
-      return category
-    }
-  })
-
   return Response.json({
     user: {
       ...user,
