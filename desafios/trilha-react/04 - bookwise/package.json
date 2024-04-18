@@ -4,7 +4,6 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "prisma generate && prisma migrate deploy && next build",
     "start": "next start",
     "lint": "next lint",
     "postinstall": "prisma generate",
@@ -14,7 +13,8 @@
     "db:seed": "npx dotenv -e .env.local -- prisma db seed",
     "prisma:generate": "npx dotenv -e .env.local -- prisma generate",
     "prisma:studio": "npx dotenv -e .env.local -- prisma studio",
-    "production:build": "npx prisma generate && npx prisma migrate deploy && next build"
+    "production:build": "npx prisma generate && npx prisma db seed && npx prisma migrate deploy && next build",
+    "build": "production:build"
   },
   "dependencies": {
     "@libsql/client": "^0.5.6",
