@@ -24,7 +24,7 @@ export default function Home() {
   }
 
   useEffect(() => {
-    if (session) {
+    if (session.data?.user) {
       router.push('/app')
     }
   }, [router, session])

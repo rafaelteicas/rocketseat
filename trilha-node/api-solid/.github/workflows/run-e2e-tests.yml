@@ -1,0 +1,29 @@
+name: Run e2e Tests
+
+on: [pull_request]
+
+jobs:
+  run-e2e-tests:
+    name: Run e2e Tests
+    runs-on: ubuntu-latest
+    services:
+      api-solid-pg:
+        image: bitnami/postgresql
+        ports:
+          - 5432:5432
+        environment:
+          - POSTGRESQL_USERNAME=docker
+          - POSTGRESQL_PASSWORD=docker
+          - POSTGRESQL_DATABASE=docker
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 18
+          cache: "npm"
+
+      - run: npm ci
+      - run: npm run test:e2e
+        env:
+          JWT_SECRET: test
+          DATABASE_URL: "postgresql://docker:docker@localhost:5432/docker?schema=public"

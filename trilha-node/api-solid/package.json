@@ -23,11 +23,13 @@
     "@rocketseat/eslint-config": "2.2.2",
     "@types/bcryptjs": "2.4.6",
     "@types/node": "20.12.7",
+    "@types/supertest": "6.0.2",
     "@vitest/coverage-v8": "1.5.0",
     "@vitest/ui": "1.5.0",
     "eslint": "8.57.0",
     "npm-run-all": "4.1.5",
     "prisma": "5.12.1",
+    "supertest": "6.3.4",
     "tsup": "8.0.2",
     "tsx": "4.7.2",
     "typescript": "5.4.5",
@@ -35,6 +37,7 @@
     "vitest": "1.5.0"
   },
   "dependencies": {
+    "@fastify/cookie": "9.3.1",
     "@fastify/jwt": "8.0.0",
     "@prisma/client": "5.12.1",
     "bcryptjs": "2.4.3",
