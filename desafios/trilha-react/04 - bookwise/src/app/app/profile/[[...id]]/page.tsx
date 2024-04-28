@@ -1,14 +1,15 @@
 'use client'
 
+import { BookOpen, Books, CaretLeft, UserList } from '@phosphor-icons/react'
+import { getYear } from 'date-fns'
+import { useRouter } from 'next/navigation'
+import { useSession } from 'next-auth/react'
+import React, { useMemo, useState } from 'react'
+
 import { useGetUserProfile } from '@/api/usecases/use-get-user-profile'
 import { Avatar } from '@/components/avatar'
 import { ProfileCard } from '@/components/card/profile-card'
 import { SearchInput } from '@/components/search-input'
-import { BookOpen, Books, CaretLeft, UserList } from '@phosphor-icons/react'
-import { getYear } from 'date-fns'
-import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
-import React, { useMemo, useState } from 'react'
 
 export default function Profile({ params }: { params: { id: string } }) {
   const [search, setSearch] = useState('')

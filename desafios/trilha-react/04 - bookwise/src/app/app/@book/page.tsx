@@ -1,12 +1,14 @@
 'use client'
 
-import React, { useContext, useState } from 'react'
-import { BookCard } from './components/book-card'
-import { SidePanelContext } from '@/service/side-panel/side-panel-context'
 import { X } from '@phosphor-icons/react'
-import { RatingsCard } from './components/ratings-card'
-import { Rate } from './components/rate'
 import { useSession } from 'next-auth/react'
+import React, { useContext, useState } from 'react'
+
+import { SidePanelContext } from '@/service/side-panel/side-panel-context'
+
+import { BookCard } from './components/book-card'
+import { Rate } from './components/rate'
+import { RatingsCard } from './components/ratings-card'
 
 export default function Book() {
   const [rateBook, setRateBook] = useState(false)

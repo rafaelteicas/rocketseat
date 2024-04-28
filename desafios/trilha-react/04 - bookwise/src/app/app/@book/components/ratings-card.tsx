@@ -1,9 +1,10 @@
-import { Avatar } from '@/components/avatar'
-import React from 'react'
-import { Stars } from '@/components/stars'
 import { formatDistanceToNowStrict } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
+import React from 'react'
+
 import { useGetRatingsByBookId } from '@/api/usecases/use-get-ratings-by-book-id'
+import { Avatar } from '@/components/avatar'
+import { Stars } from '@/components/stars'
 
 interface RatingCardProps {
   bookId: string

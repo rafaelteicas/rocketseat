@@ -1,8 +1,9 @@
-import React from 'react'
-import Image from 'next/image'
-import { Stars } from '@/components/stars'
 import { formatDistanceToNowStrict } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
+import Image from 'next/image'
+import React from 'react'
+
+import { Stars } from '@/components/stars'
 
 interface ProfileCardProps {
   book: {

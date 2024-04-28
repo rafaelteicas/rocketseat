@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
-import { Avatar } from '@/components/avatar'
-import { useSession } from 'next-auth/react'
 import { Check, Star, X } from '@phosphor-icons/react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { api } from '@/lib/axios'
+import { useSession } from 'next-auth/react'
+import React, { useState } from 'react'
+
 import { useGetRatingsByBookId } from '@/api/usecases/use-get-ratings-by-book-id'
+import { Avatar } from '@/components/avatar'
+import { api } from '@/lib/axios'
 
 interface DataDTO {
   rating: number

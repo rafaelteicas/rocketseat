@@ -1,6 +1,7 @@
 'use client'
-import React from 'react'
 import { Star, StarHalf } from '@phosphor-icons/react'
+import React from 'react'
+
 import { cn } from '@/utils/cn'
 
 interface Props {

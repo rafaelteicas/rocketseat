@@ -1,8 +1,9 @@
-import { Stars } from '@/components/stars'
-import React from 'react'
+import { BookmarkSimple, BookOpen } from '@phosphor-icons/react'
 import Image from 'next/image'
-import { BookOpen, BookmarkSimple } from '@phosphor-icons/react'
+import React from 'react'
+
 import { useGetBookById } from '@/api/usecases/use-get-book-by-id'
+import { Stars } from '@/components/stars'
 
 interface BookCardProps {
   bookId: string

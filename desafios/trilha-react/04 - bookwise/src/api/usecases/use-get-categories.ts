@@ -1,6 +1,8 @@
 import { useQuery } from '@tanstack/react-query'
-import { CategoryModel } from '../models/category'
+
 import { api } from '@/lib/axios'
+
+import { CategoryModel } from '../models/category'
 
 export function useGetCategories() {
   const { data, isLoading } = useQuery<void, Error, CategoryModel[]>({

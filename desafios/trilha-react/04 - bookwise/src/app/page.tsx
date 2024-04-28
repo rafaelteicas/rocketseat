@@ -1,11 +1,12 @@
 'use client'
 
 import Image from 'next/image'
-import { signIn, useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import { AuthButton } from '@/components/auth-button/auth-button'
-import { cover, github, google, logo, rocket } from '@/assets'
+import { signIn, useSession } from 'next-auth/react'
 import { useEffect } from 'react'
+
+import { cover, github, google, logo, rocket } from '@/assets'
+import { AuthButton } from '@/components/auth-button/auth-button'
 
 export default function Home() {
   const router = useRouter()

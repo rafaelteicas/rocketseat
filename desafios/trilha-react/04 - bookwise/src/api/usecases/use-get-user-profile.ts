@@ -1,5 +1,7 @@
-import { api } from '@/lib/axios'
 import { useQuery } from '@tanstack/react-query'
+
+import { api } from '@/lib/axios'
+
 import { UserModel } from '../models/user'
 
 export function useGetUserProfile(userId: string) {

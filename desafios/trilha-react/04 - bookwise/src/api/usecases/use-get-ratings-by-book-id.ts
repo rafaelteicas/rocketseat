@@ -1,5 +1,7 @@
-import { api } from '@/lib/axios'
 import { useQuery } from '@tanstack/react-query'
+
+import { api } from '@/lib/axios'
+
 import { RatingModel } from '../models/rating'
 
 export function useGetRatingsByBookId(bookId: string) {

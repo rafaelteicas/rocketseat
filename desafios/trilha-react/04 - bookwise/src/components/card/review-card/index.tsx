@@ -1,10 +1,11 @@
-import Image from 'next/image'
-import React from 'react'
-import { Avatar } from '@/components/avatar'
-import { Stars } from '@/components/stars'
 import { formatDistanceToNowStrict } from 'date-fns'
 import { ptBR } from 'date-fns/locale/pt-BR'
+import Image from 'next/image'
 import Link from 'next/link'
+import React from 'react'
+
+import { Avatar } from '@/components/avatar'
+import { Stars } from '@/components/stars'
 
 interface ReviewCardProps {
   userId: string

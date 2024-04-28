@@ -1,19 +1,20 @@
 'use client'
 
-import React from 'react'
-import Image from 'next/image'
-import Link from 'next/link'
 import {
-  SignIn,
-  SignOut,
   Binoculars,
   ChartLineUp,
+  SignIn,
+  SignOut,
   User,
 } from '@phosphor-icons/react'
+import Image from 'next/image'
+import Link from 'next/link'
 import { signOut, useSession } from 'next-auth/react'
+import React from 'react'
+
+import logo from '../../assets/logo.svg'
 import { Avatar } from '../avatar'
 import { NavItem } from './NavItem'
-import logo from '../../assets/logo.svg'
 import sidebarBg from './sidebarBg.svg'
 
 export function Sidebar() {
@@ -24,7 +25,7 @@ export function Sidebar() {
   }
 
   return (
-    <aside className="flex h-screen">
+    <aside className="flex h-full">
       <div
         className="fixed bottom-5 top-5 flex w-[256px] flex-1 flex-col items-center justify-center rounded-md"
         style={{
@@ -66,7 +67,7 @@ export function Sidebar() {
               />
             </div>
           ) : (
-            <Link href={'/auth'} className="flex flex-row items-center gap-2">
+            <Link href={'/'} className="flex flex-row items-center gap-2">
               <h4>Fazer login</h4>
               <SignIn size={20} className="fill-green-100" />
             </Link>

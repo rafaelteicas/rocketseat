@@ -1,5 +1,6 @@
-import { prisma } from '@/lib/prisma'
 import { NextRequest } from 'next/server'
+
+import { prisma } from '@/lib/prisma'
 
 export async function GET(request: NextRequest) {
   const limit = request.nextUrl.searchParams.get('limit')

@@ -1,13 +1,15 @@
 'use client'
 
-import React, { useMemo, useState } from 'react'
 import { Binoculars } from '@phosphor-icons/react'
-import { PopularBooksCard } from '@/components/card/popular-books-card'
-import { useGetBooks } from '@/api/usecases/use-get-books'
-import { useGetCategories } from '@/api/usecases/use-get-categories'
-import { useGetBooksByCategory } from '@/api/usecases/use-get-books-by-category'
-import { SearchInput } from '@/components/search-input'
 import { useSession } from 'next-auth/react'
+import React, { useMemo, useState } from 'react'
+
+import { useGetBooks } from '@/api/usecases/use-get-books'
+import { useGetBooksByCategory } from '@/api/usecases/use-get-books-by-category'
+import { useGetCategories } from '@/api/usecases/use-get-categories'
+import { PopularBooksCard } from '@/components/card/popular-books-card'
+import { SearchInput } from '@/components/search-input'
+import { Skeleton } from '@/components/ui/skeleton'
 
 export default function Explore() {
   const [selectedFilter, setSelectedFilter] = useState<string>('Todos')
@@ -32,10 +34,6 @@ export default function Explore() {
       return books
     }
   }, [search, books, selectedFilter, booksByCategory])
-
-  if (isLoading) {
-    return <h1>Carregando</h1>
-  }
 
   return (
     <section className="pt-6">
@@ -76,6 +74,12 @@ export default function Explore() {
           ))}
         </div>
         <div className="grid grid-cols-3 gap-4 pt-12">
+          {isLoading &&
+            Array.from(Array(20).keys()).map((_, i) => (
+              <Skeleton key={i}>
+                <div className="h-28 w-full rounded-lg bg-gray-700" />
+              </Skeleton>
+            ))}
           {data?.map((book) => (
             <PopularBooksCard
               bookId={book.id}

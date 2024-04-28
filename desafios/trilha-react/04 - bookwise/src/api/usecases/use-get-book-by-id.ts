@@ -1,6 +1,8 @@
-import { api } from '@/lib/axios'
-import { BookModel } from '../models/book'
 import { useQuery } from '@tanstack/react-query'
+
+import { api } from '@/lib/axios'
+
+import { BookModel } from '../models/book'
 
 interface BookProps {
   book: BookModel
