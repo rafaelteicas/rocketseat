@@ -1,0 +1,7 @@
+{
+  "extends": ["@rocketseat/eslint-config/node.js"],
+  "rules": {
+    "no-useless-constructor": "off",
+    "@typescript-eslint/no-explicit-any": "warn"
+  },
+}
